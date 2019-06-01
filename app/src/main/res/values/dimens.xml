@@ -1,0 +1,87 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="corner_radius_tiny">2dp</dimen>
+    <dimen name="corner_radius_small">4dp</dimen>
+    <dimen name="corner_radius_normal">8dp</dimen>
+    <dimen name="corner_radius_medium">12dp</dimen>
+    <dimen name="corner_radius_large">16dp</dimen>
+    <dimen name="corner_radius_huge">24dp</dimen>
+
+    <dimen name="action_bar_title">18sp</dimen>
+
+    <!-- font sizes -->
+    <dimen name="text_size_tiny">8sp</dimen>
+    <dimen name="text_size_tiny_v2">10sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_normal">14sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_large">18sp</dimen>
+    <dimen name="text_size_huge">20sp</dimen>
+    <dimen name="text_size_huge_v2">22sp</dimen>
+
+    <!-- typical spacing between two views -->
+    <dimen name="spacing_tiny">1dp</dimen>
+    <dimen name="spacing_tiny_v2">2dp</dimen>
+    <dimen name="spacing_tiny_v3">4dp</dimen>
+    <dimen name="spacing_tiny_v4">6dp</dimen>
+    <dimen name="spacing_small">10dp</dimen>
+    <dimen name="spacing_normal">16dp</dimen>
+    <dimen name="spacing_medium">20dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_huge">32dp</dimen>
+
+    <!-- typical padding of views -->
+    <dimen name="padding_tiny">2dp</dimen>
+    <dimen name="padding_tiny_v2">4dp</dimen>
+    <dimen name="padding_tiny_v3">6dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_small_v2">10dp</dimen>
+    <dimen name="padding_small_v3">12dp</dimen>
+    <dimen name="padding_small_v4">14dp</dimen>
+    <dimen name="padding_normal">16dp</dimen>
+    <dimen name="padding_large">18dp</dimen>
+    <dimen name="padding_large_v2">20dp</dimen>
+    <dimen name="padding_large_v3">22dp</dimen>
+    <dimen name="padding_huge">24dp</dimen>
+    <dimen name="padding_huge_v2">28dp</dimen>
+    <dimen name="padding_huge_v3">32dp</dimen>
+
+    <!-- typical margin of views -->
+    <dimen name="margin_tiny">2dp</dimen>
+    <dimen name="margin_tiny_v2">4dp</dimen>
+    <dimen name="margin_tiny_v3">6dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_small_v2">10dp</dimen>
+    <dimen name="margin_small_v3">12dp</dimen>
+    <dimen name="margin_small_v4">14dp</dimen>
+    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_large">18dp</dimen>
+    <dimen name="margin_large_v2">20dp</dimen>
+    <dimen name="margin_large_v3">22dp</dimen>
+    <dimen name="margin_huge">24dp</dimen>
+
+
+    <!-- typical elevations -->
+    <dimen name="elevation_tiny">1dp</dimen>
+    <dimen name="elevation_small">2dp</dimen>
+    <dimen name="elevation_normal">4dp</dimen>
+    <dimen name="elevation_large">6dp</dimen>
+    <dimen name="elevation_huge">8dp</dimen>
+
+    <!-- typical strokes -->
+    <dimen name="stroke_tiny">0.5dp</dimen>
+    <dimen name="stroke_tiny_v2">1dp</dimen>
+    <dimen name="stroke_small">2dp</dimen>
+    <dimen name="stroke_normal">4dp</dimen>
+    <dimen name="stroke_large">6dp</dimen>
+    <dimen name="stroke_huge">8dp</dimen>
+
+    <dimen name="design_bottom_navigation_text_size" tools:override="true">10sp</dimen>
+    <dimen name="design_bottom_navigation_active_text_size" tools:override="true">11sp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- common -->
+    <dimen name="button_height">42dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>
