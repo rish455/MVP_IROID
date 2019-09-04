@@ -15,10 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    public static final String BASE_URL = "http://18.217.32.254/"; // local
-    //public static final String BASE_URL = "http://18.188.160.47/"; // demo
-    //public static final String BASE_URL = "http:live.com/"; // live
-
+    public static final String BASE_URL = "https://api.themoviedb.org/3/"; // local
 
     private static Retrofit retrofit = null;
     private static OkHttpClient.Builder httpClient = null;

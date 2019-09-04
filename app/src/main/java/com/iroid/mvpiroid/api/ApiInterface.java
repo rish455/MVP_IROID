@@ -1,6 +1,7 @@
 package com.iroid.mvpiroid.api;
 
 import com.google.gson.JsonObject;
+import com.iroid.mvpiroid.pojo.top_rated_movies.MoviesResp;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -17,13 +18,12 @@ import retrofit2.http.Query;
 public interface ApiInterface {
 
 
-    @FormUrlEncoded
-    @POST("login")
-    Call<JsonObject> login(@Field("email") String name,
-                           @Field("password") String password);
-
-    @GET("notifications/")
-    Call<JsonObject> getNotifications(@Query("boat_id") String boat);
+    @GET("movie/top_rated")
+    Call<MoviesResp> getTopRatedMovies(
+            @Query("api_key") String apiKey,
+            @Query("language") String language,
+            @Query("page") int pageIndex
+    );
 
 
 }
