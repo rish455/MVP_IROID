@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ui.main.login.LoginActivity"
+    tools:showIn="@layout/activity_login">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+<!--
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@color/colorWhite" />
+-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/spacing_huge"
+            android:layout_marginEnd="@dimen/spacing_huge"
+            android:paddingBottom="@dimen/padding_huge"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:src="@drawable/img_zebra_logo" />
+
+            <EditText
+                android:id="@+id/etMobileNo"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_height"
+                android:layout_marginStart="@dimen/margin_small_v2"
+                android:layout_marginTop="@dimen/spacing_huge"
+                android:layout_marginEnd="@dimen/margin_small_v2"
+                android:background="@drawable/bg_edit_text_enabled"
+                android:drawablePadding="@dimen/padding_huge"
+                android:hint="@string/enter_mobile_number"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:paddingStart="@dimen/padding_normal"
+                android:paddingEnd="@dimen/padding_normal"
+                android:textColor="@color/colorTextDark"
+                android:textColorHint="@color/colorTextHint"
+                android:textSize="@dimen/text_size_normal" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+
+                android:layout_marginStart="@dimen/margin_small_v2"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginEnd="@dimen/margin_small_v2"
+                app:passwordToggleEnabled="true">
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:background="@drawable/bg_edit_text_enabled"
+                    android:drawablePadding="@dimen/padding_huge"
+                    android:hint="@string/enter_password"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:paddingStart="@dimen/padding_normal"
+                    android:paddingEnd="@dimen/padding_normal"
+                    android:textColor="@color/colorTextDark"
+                    android:textColorHint="@color/colorTextHint"
+                    android:textSize="@dimen/text_size_normal" />
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tvForgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginEnd="@dimen/margin_small_v2"
+                android:text="@string/forgot_password"
+                android:textAllCaps="true"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_size_normal" />
+
+            <Button
+                android:id="@+id/btLogin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginStart="@dimen/margin_small_v2"
+                android:layout_marginTop="@dimen/margin_huge"
+                android:layout_marginEnd="@dimen/margin_small_v2"
+                android:layout_marginBottom="@dimen/margin_small_v3"
+                android:background="@drawable/selector_button_gradient"
+                android:text="@string/login"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</FrameLayout>

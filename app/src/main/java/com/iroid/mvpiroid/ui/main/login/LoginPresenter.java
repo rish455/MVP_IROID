@@ -1,72 +1,50 @@
 package com.iroid.mvpiroid.ui.main.login;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
-import com.ewaantech.jalboot.api.ApiClient;
-import com.ewaantech.jalboot.api.ApiInterface;
-import com.ewaantech.jalboot.app_prefs.GlobalPreferManager;
-import com.ewaantech.jalboot.pojo.boat.BoatData;
-import com.ewaantech.jalboot.utils.Constants;
-import com.google.gson.JsonObject;
+import com.iroid.mvpiroid.api.ApiClient;
+import com.iroid.mvpiroid.api.ApiInterface;
+import com.iroid.mvpiroid.pojo.BaseResponse;
+import com.iroid.mvpiroid.utils.Constants;
+import com.iroid.mvpiroid.utils.NetworkUtils;
+import com.iroid.mvpiroid.utils.PreferenceUtils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginPresenter implements LoginPresenterInterface {
+class LoginPresenter {
 
     private LoginViewInterface loginViewInterface;
     private ApiInterface apiService;
+    private Context mContext;
 
-    LoginPresenter(LoginViewInterface loginViewInterface) {
+    LoginPresenter(LoginViewInterface loginViewInterface, Context context) {
+        this.mContext = context;
         this.loginViewInterface = loginViewInterface;
-        apiService = ApiClient.getClient().create(ApiInterface.class);
+        this.apiService = ApiClient.getClient().create(ApiInterface.class);
     }
 
-    @Override
-    public void getBoats() {
-        //loginViewInterface.showProgressIndicator();
-        Call<BoatData> call = apiService.getBoats();
-        call.enqueue(new Callback<BoatData>() {
-            @Override
-            public void onResponse(@NonNull Call<BoatData> call, @NonNull Response<BoatData> response) {
+    void login(String mobileNo, String password) {
 
-                if (response.isSuccessful()) {
-                    BoatData boatData = response.body();
-                    if (boatData != null && boatData.getStatus())
-                        loginViewInterface.onGetBoats(boatData.getData());
-                    else
-                        loginViewInterface.onFailed(Constants.ERROR_MESSAGE_SERVER);
+        if (!isDataValid(mobileNo, password))
+            return;
 
-                } else
-                    loginViewInterface.onFailed(Constants.ERROR_MESSAGE_SERVER);
-
-                //loginViewInterface.dismissProgressIndicator();
-
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<BoatData> call, @NonNull Throwable t) {
-                loginViewInterface.onServerError(Constants.ERROR_MESSAGE_SERVER);
-                //loginViewInterface.dismissProgressIndicator();
-            }
-        });
-    }
-
-    @Override
-    public void login(String email, String password, String boatId) {
         loginViewInterface.showProgressIndicator();
-        Call<JsonObject> call = apiService.login(email, password, boatId);
-        call.enqueue(new Callback<JsonObject>() {
+        Call<BaseResponse> call = apiService.login(mobileNo, password, "");
+        call.enqueue(new Callback<BaseResponse>() {
             @Override
-            public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+            public void onResponse(@NonNull Call<BaseResponse> call, @NonNull Response<BaseResponse> response) {
 
-                if (response.isSuccessful() && response.body() != null ) {
-                    JsonObject jsonObject = response.body();
-                    if (jsonObject.get(Constants.STATUS).getAsBoolean()) {
-                        JsonObject data = jsonObject.get(Constants.DATA).getAsJsonObject();
+                if (response.isSuccessful() && response.body() != null) {
+                    BaseResponse resp = response.body();
+                    if (resp.isStatus()) {
+                        PreferenceUtils.setIsLoggedIn(true);
+                        loginViewInterface.onLoginSuccess("Login Success");
                     } else
-                        loginViewInterface.onLoginFailed(jsonObject.get(Constants.MESSAGE).getAsString());
+                        loginViewInterface.onFailed(resp.getMessage());
 
                 } else
                     loginViewInterface.onFailed(Constants.ERROR_MESSAGE_SERVER);
@@ -75,10 +53,25 @@ public class LoginPresenter implements LoginPresenterInterface {
             }
 
             @Override
-            public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
-                loginViewInterface.onServerError(Constants.ERROR_MESSAGE_SERVER);
+            public void onFailure(@NonNull Call<BaseResponse> call, @NonNull Throwable t) {
+                if (!NetworkUtils.isNetworkConnected(mContext)) {
+                    loginViewInterface.onNoInternet(Constants.ERROR_MESSAGE_NO_INTERNET);
+                } else loginViewInterface.onServerError(Constants.ERROR_MESSAGE_SERVER);
                 loginViewInterface.dismissProgressIndicator();
             }
         });
+    }
+
+    private boolean isDataValid(String mob, String pass) {
+        boolean isValid = true;
+        if (TextUtils.isEmpty(mob)) {
+            isValid = false;
+            loginViewInterface.onFailed("Please enter mobile no!");
+        } else if (TextUtils.isEmpty(pass)) {
+            isValid = false;
+            loginViewInterface.onFailed("Please enter password!");
+        }
+
+        return isValid;
     }
 }

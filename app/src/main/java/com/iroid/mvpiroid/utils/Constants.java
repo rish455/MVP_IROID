@@ -6,6 +6,7 @@ public final class Constants {
     public static String DATA = "data";
     public static String MESSAGE = "message";
 
+    public static String ERROR_MESSAGE_NO_INTERNET = "Please check your internet connection!";
     public static String ERROR_MESSAGE_SERVER = "Something went wrong";
 
     /*Fragments Tag BEG*/

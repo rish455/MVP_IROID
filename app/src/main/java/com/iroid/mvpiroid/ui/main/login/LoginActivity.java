@@ -1,105 +1,82 @@
 package com.iroid.mvpiroid.ui.main.login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.iroid.mvpiroid.R;
 import com.iroid.mvpiroid.ui.base.BaseActivity;
+import com.iroid.mvpiroid.utils.CommonUtils;
 
-import java.util.ArrayList;
+public class LoginActivity
+        extends BaseActivity
+        implements View.OnClickListener , LoginViewInterface{
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener, LoginViewInterface {
+    private EditText etMobileNo, etPassword;
 
-    private static final String TAG = LoginActivity.class.getSimpleName();
+    private LoginPresenter mPresenter;
 
-    private LoginPresenterInterface loginPresenterInterface;
-
-    private ArrayList<Boat> mBoatDataSet = new ArrayList<>();
-    private Boat mCurrentBoat;
-
-    private TextView tvChooseBoat;
-    private EditText etEmail;
-    private EditText etPassword;
+    public static Intent start(Context context) {
+        return new Intent(context, LoginActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        mPresenter = new LoginPresenter(this, this);
+    }
 
-        initViews();
-        loginPresenterInterface = new LoginPresenter(this);
-        callGetBoatListService();
+    @Override
+    public void initViews() {
+        etMobileNo = findViewById(R.id.etMobileNo);
+        etPassword = findViewById(R.id.etPassword);
+
+        findViewById(R.id.tvForgotPassword).setOnClickListener(this);
+        findViewById(R.id.btLogin).setOnClickListener(this);
 
     }
 
-    private void initViews() {
-        findViewById(R.id.tvForgotPassword).setOnClickListener(this);
-        findViewById(R.id.btLogin).setOnClickListener(this);
-        tvChooseBoat = findViewById(R.id.tvChooseBoat);
-        etEmail = findViewById(R.id.etEmail);
-        etPassword = findViewById(R.id.etPassword);
-        tvChooseBoat.setOnClickListener(this);
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_login;
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tvForgotPassword:
-                startActivity(new Intent(this, ForgotPasswordActivity.class));
+        switch (v.getId()){
+            case R.id.btLogin :
+                /*startActivity(DashboardActivity.start(this));
+                finish();*/
+                if (mPresenter != null)
+                    mPresenter.login(etMobileNo.getText().toString(), etPassword.getText().toString());
                 break;
-                case R.id.btLogin:
-                    String email = etEmail.getText().toString();
-                    String password = etPassword.getText().toString();
-                    if (validate(email, password, mCurrentBoat != null ? mCurrentBoat.getBoatId() : ""))
-                        callLoginService(email, password, mCurrentBoat.getBoatId());
-                        //startActivity(new Intent(this, HomeActivity.class));
-                break;
-                case R.id.tvChooseBoat:
-                    CommonUtils.showBoatFragmentDialog(this, mBoatDataSet);
-                break;
-            default:
+            case R.id.tvForgotPassword :
+                //startActivity(ForgotPasswordActivity.start(this));
                 break;
         }
     }
 
     @Override
     public void onLoginSuccess(String message) {
-        Log.i(TAG, "onLoginSuccess: " + message);
-        Intent intent = new Intent(this, HomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onLoginFailed(String message) {
-        Log.e(TAG, "onLoginFailed: " + message);
-        CommonUtils.showErrorSnackbar(this, message);
-    }
-
-    @Override
-    public void onGetBoats(ArrayList<Boat> boatDataSet) {
-        mBoatDataSet = boatDataSet;
+        //startActivity(DashboardActivity.start(this));
+        finish();
     }
 
     @Override
     public void onFailed(String message) {
-        Log.e(TAG, "onFailed: " + message);
-        CommonUtils.showErrorSnackbar(this, message);
+        CommonUtils.showToast(this, message);
     }
 
     @Override
     public void onServerError(String message) {
-
+        CommonUtils.showToast(this, message);
     }
 
     @Override
     public void onNoInternet(String message) {
-
+        CommonUtils.showToast(this, message);
     }
 
     @Override
@@ -110,27 +87,5 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     public void showProgressIndicator() {
         showProgress();
-    }
-
-    private void callGetBoatListService(){
-        loginPresenterInterface.getBoats();
-    }
-
-    private void callLoginService(String email, String password, String boatId){
-        loginPresenterInterface.login(email, password, boatId);
-    }
-
-    private boolean validate(String email, String password, String boatId) {
-        if (TextUtils.isEmpty(email)) {
-            CommonUtils.showErrorSnackbar(this, getString(R.string.please_enter_username));
-            return false;
-        } else if (TextUtils.isEmpty(password)) {
-            CommonUtils.showErrorSnackbar(this, getString(R.string.enter_your_password));
-            return false;
-        } else if (TextUtils.isEmpty(boatId)){
-            CommonUtils.showErrorSnackbar(this, getString(R.string.Please_choose_a_boat));
-            return false;
-        }
-        return true;
     }
 }

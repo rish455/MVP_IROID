@@ -29,6 +29,8 @@ task clean(type: Delete) {
 
 ext {
     // Sdk and tools
+    versionCode = 1
+    versionName = 1.0
     minSdkVersion = 19
     targetSdkVersion = 28
     compileSdkVersion = 28
@@ -43,7 +45,7 @@ ext {
     supportLibraryVersion = '28.0.0'
     constraintLayoutVersion = '1.1.3'
     gsonVersion = '2.8.2'
-    glideVersion = '3.7.0'
+    glideVersion = '4.8.0'
     retrofit2Version = '2.4.0'
     okhttp3Version = '3.11.0'
     materialDialogVersion = '0.9.6.0'

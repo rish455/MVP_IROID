@@ -6,4 +6,14 @@
 
     <color name="placeholder_grey">#AAADC4</color>
     <color name="placeholder_grey_20">#33AAADC4</color>
+
+    <color name="editTextStroke">#DCDCDC</color>
+    <color name="colorEditTextBg">#F6F6F8</color>
+    <color name="colorEditTextGrayBg">#E7E7E7</color>
+    <color name="colorTextDark">#707070</color>
+    <color name="colorTextHint">#B1B1B2</color>
+
+    <color name="colorButtonLight">#FE5195</color>
+    <color name="colorButtonDark">#FF106B</color>
+    <color name="colorButtonGrey">#676767</color>
 </resources>

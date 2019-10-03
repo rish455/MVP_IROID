@@ -10,5 +10,10 @@
     <string name="tap_to_reload">Tap to reload</string>
     <string name="menu_refresh">Refresh</string>
 
+    <dimen name="edit_text_height">42dp</dimen>
 
+    <string name="enter_mobile_number">Enter Mobile Number</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password?</string>
 </resources>
